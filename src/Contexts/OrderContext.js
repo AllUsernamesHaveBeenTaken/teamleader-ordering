@@ -15,6 +15,11 @@ export class OrderProvider extends Component {
       .then(data => this.setState({ orders: data }));
   }
 
+  totalOrder = (items) => {
+    const total = items.map(item => item.total);
+    return total.length > 0 ? total.reduce((a, b) => +a + +b) : 0;
+  };
+
   findOrder = (orders, orderId) => orders.find(order => order.id === orderId);
 
   findItem = (items, itemId) => items.find(item => item['product-id'] === itemId);
@@ -36,6 +41,7 @@ export class OrderProvider extends Component {
     const { orders } = this.state;
     const randomBoolean = Math.random() >= 0.3;
     const foundOrder = this.findOrder(orders, orderId);
+    foundOrder.total = this.totalOrder(foundOrder.items).toString();
     const newOrders = orders.map(
       order => (order.id === orderId ? { ...foundOrder, success: randomBoolean } : order),
     );
@@ -78,6 +84,19 @@ export class OrderProvider extends Component {
     this.setState({ orders: newOrders });
   };
 
+  addNewItem = (orderId, itemToAdd) => {
+    const { orders } = this.state;
+    const foundOrder = this.findOrder(orders, orderId);
+    const foundItem = this.findItem(foundOrder.items, itemToAdd['product-id']);
+    if (foundItem === undefined) {
+      foundOrder.items.push(itemToAdd);
+    } else {
+      this.addItem(orderId, itemToAdd['product-id']);
+    }
+    const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
+    this.setState({ orders: newOrders });
+  };
+
   render() {
     const { children } = this.props;
     const { orders, selectedOrder } = this.state;
@@ -91,6 +110,7 @@ export class OrderProvider extends Component {
           placeOrder: this.placeOrder,
           substractItem: this.substractItem,
           addItem: this.addItem,
+          addNewItem: this.addNewItem,
         }}
       >
         {children}

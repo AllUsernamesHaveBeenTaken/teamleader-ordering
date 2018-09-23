@@ -7,7 +7,9 @@ import AddProduct from './AddProduct';
 import { Modal } from '../Elements';
 import { Toggle } from '../Utilities';
 
-const ProductList = ({ items, orderId, success }) => (
+const ProductList = ({
+  items, orderId, success, addNewItem,
+}) => (
   <div>
     <h2>Products in this order</h2>
     <table style={{ borderCollapse: 'collapse' }}>
@@ -39,7 +41,13 @@ const ProductList = ({ items, orderId, success }) => (
                     </button>
                     <Modal on={on} toggle={toggle}>
                       <ProductContext.Consumer>
-                        {({ products }) => <AddProduct products={products} />}
+                        {({ products }) => (
+                          <AddProduct
+                            orderId={orderId}
+                            products={products}
+                            addNewItem={addNewItem}
+                          />
+                        )}
                       </ProductContext.Consumer>
                     </Modal>
                   </Fragment>
@@ -66,6 +74,7 @@ ProductList.propTypes = {
   ).isRequired,
   orderId: PropTypes.string.isRequired,
   success: PropTypes.bool,
+  addNewItem: PropTypes.func.isRequired,
 };
 
 ProductList.defaultProps = {

@@ -21,7 +21,7 @@ class AddProduct extends Component {
 
   render() {
     const { quantity, selectedItem } = this.state;
-    const { products } = this.props;
+    const { products, addNewItem, orderId } = this.props;
     return (
       <div>
         <h3>Product</h3>
@@ -43,7 +43,19 @@ class AddProduct extends Component {
           onChange={e => this.setState({ quantity: e.target.value < 1 ? 1 : e.target.value })}
         />
         <h3>{`Total: ${(+quantity * selectedItem.price).toFixed(2)}`}</h3>
-        <button type="submit">Add to cart</button>
+        <button
+          type="submit"
+          onClick={() =>
+            addNewItem(orderId, {
+              'product-id': selectedItem.id,
+              quantity: quantity.toString(),
+              'unit-price': selectedItem.price,
+              total: (+quantity * selectedItem.price).toFixed(2),
+            })
+          }
+        >
+          Add to cart
+        </button>
       </div>
     );
   }
@@ -60,4 +72,6 @@ AddProduct.propTypes = {
       price: PropTypes.string,
     }),
   ).isRequired,
+  orderId: PropTypes.string.isRequired,
+  addNewItem: PropTypes.func.isRequired,
 };
