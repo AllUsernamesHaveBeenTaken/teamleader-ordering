@@ -1,13 +1,15 @@
 import React from 'react';
 import './App.css';
 
-import { OrderProvider } from './Contexts';
+import { OrderProvider, ProductProvider } from './Contexts';
 import { OrderOverview } from './Components';
 
 const App = () => (
   <div className="App">
     <OrderProvider>
-      <OrderOverview />
+      <ProductProvider>
+        <OrderOverview />
+      </ProductProvider>
     </OrderProvider>
   </div>
 );

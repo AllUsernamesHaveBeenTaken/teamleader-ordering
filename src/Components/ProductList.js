@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import { ProductContext } from '../Contexts';
 import ProductItem from './ProductItem';
 import AddProduct from './AddProduct';
 import { Modal } from '../Elements';
@@ -27,22 +28,26 @@ const ProductList = ({ items, orderId, success }) => (
             orderId={orderId}
           />
         ))}
-        <tr>
-          <th align="left">
-            <Toggle>
-              {({ on, toggle }) => (
-                <Fragment>
-                  <button type="button" onClick={toggle}>
-                    +
-                  </button>
-                  <Modal on={on} toggle={toggle}>
-                    <AddProduct />
-                  </Modal>
-                </Fragment>
-              )}
-            </Toggle>
-          </th>
-        </tr>
+        {!success && (
+          <tr>
+            <th align="left">
+              <Toggle>
+                {({ on, toggle }) => (
+                  <Fragment>
+                    <button type="button" onClick={toggle}>
+                      +
+                    </button>
+                    <Modal on={on} toggle={toggle}>
+                      <ProductContext.Consumer>
+                        {({ products }) => <AddProduct products={products} />}
+                      </ProductContext.Consumer>
+                    </Modal>
+                  </Fragment>
+                )}
+              </Toggle>
+            </th>
+          </tr>
+        )}
       </tbody>
     </table>
   </div>

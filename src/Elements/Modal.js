@@ -39,7 +39,7 @@ const ModalWrapper = styled.div`
   align-items: center;
 `;
 
-const ModalCard = Card.extend`
+const ModalCard = styled(Card)`
   position: relative;
   z-index: 1;
   min-width: 320px;
