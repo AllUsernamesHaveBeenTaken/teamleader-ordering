@@ -66,19 +66,24 @@ export class OrderProvider extends Component {
     const { orders } = this.state;
     const foundOrder = this.findOrder(orders, orderId);
     const foundItem = this.findItem(foundOrder.items, itemId);
-    const quantity = foundItem.quantity - 1;
-    const newTotal = quantity * +foundItem['unit-price'];
-    const findItemIndex = foundOrder.items.findIndex(item => item['product-id'] === itemId);
-    foundOrder.items[findItemIndex] = {
-      ...foundItem,
-      quantity: quantity.toString(),
-      total: newTotal.toFixed(2),
-    };
-    foundOrder.total = this.totalOrder(foundOrder.items).toString();
-    const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
-    this.setState(() => ({
-      orders: newOrders,
-    }));
+
+    if (foundItem.quantity === '1') {
+      this.deleteItem(orderId, itemId);
+    } else {
+      const quantity = foundItem.quantity - 1;
+      const newTotal = quantity * +foundItem['unit-price'];
+      const findItemIndex = foundOrder.items.findIndex(item => item['product-id'] === itemId);
+      foundOrder.items[findItemIndex] = {
+        ...foundItem,
+        quantity: quantity.toString(),
+        total: newTotal.toFixed(2),
+      };
+      foundOrder.total = this.totalOrder(foundOrder.items).toString();
+      const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
+      this.setState(() => ({
+        orders: newOrders,
+      }));
+    }
   };
 
   addItem = (orderId, itemId) => {
