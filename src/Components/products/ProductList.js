@@ -46,7 +46,7 @@ const ProductList = ({
                 {({ on, toggle }) => (
                   <Fragment>
                     <button data-testid="add-product" type="button" onClick={toggle}>
-                      +
+                    Add a product
                     </button>
                     <Modal on={on} toggle={toggle}>
                       <ProductContext.Consumer>

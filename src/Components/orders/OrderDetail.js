@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
 import ProductList from '../products/ProductList';
-import { FlashMessage } from '../../Elements';
+import AddProduct from '../products/AddProduct';
+import { Toggle } from '../../Utilities';
+import { FlashMessage, Modal } from '../../Elements';
+
+import { ProductContext } from '../../Contexts';
 
 const OrderDetail = ({
   order, placeOrder, addNewItem, addItem, deleteItem, substractItem,
@@ -22,7 +26,30 @@ const OrderDetail = ({
         substractItem={substractItem}
       />
     ) : (
-      <p>This order has no products.</p>
+      <Fragment>
+        <p>This order has no products.</p>
+        <Toggle>
+          {({ on, toggle }) => (
+            <Fragment>
+              <button data-testid="add-product" type="button" onClick={toggle}>
+                Add a product
+              </button>
+              <Modal on={on} toggle={toggle}>
+                <ProductContext.Consumer>
+                  {({ products }) => (
+                    <AddProduct
+                      data-testid="<AddProduct />"
+                      orderId={order.id}
+                      products={products}
+                      addNewItem={addNewItem}
+                    />
+                  )}
+                </ProductContext.Consumer>
+              </Modal>
+            </Fragment>
+          )}
+        </Toggle>
+      </Fragment>
     )}
     <h2>{`Total: ${order.total}`}</h2>
     {order.items.length > 0 && (
