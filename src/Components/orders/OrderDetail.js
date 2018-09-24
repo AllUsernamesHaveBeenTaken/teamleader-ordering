@@ -5,11 +5,6 @@ import PropTypes from 'prop-types';
 import ProductList from '../products/ProductList';
 import { FlashMessage } from '../../Elements';
 
-const totalOrder = (items) => {
-  const total = items.map(item => item.total);
-  return total.length > 0 ? total.reduce((a, b) => +a + +b) : 0;
-};
-
 const OrderDetail = ({
   order, placeOrder, addNewItem, addItem, deleteItem, substractItem,
 }) => (
@@ -29,7 +24,7 @@ const OrderDetail = ({
     ) : (
       <p>This order has no products.</p>
     )}
-    <h2>{`Total: ${totalOrder(order.items)}`}</h2>
+    <h2>{`Total: ${order.total}`}</h2>
     {order.items.length > 0 && (
       <button type="submit" disabled={order.success} onClick={() => placeOrder(order.id)}>
         Place order

@@ -33,6 +33,7 @@ export class OrderProvider extends Component {
     const foundOrder = this.findOrder(orders, orderId);
     const findItemIndex = foundOrder.items.findIndex(item => item['product-id'] === itemId);
     foundOrder.items.splice(findItemIndex, 1);
+    foundOrder.total = this.totalOrder(foundOrder.items).toString();
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
     this.setState(() => ({
       orders: newOrders,
@@ -61,13 +62,14 @@ export class OrderProvider extends Component {
     const foundOrder = this.findOrder(orders, orderId);
     const foundItem = this.findItem(foundOrder.items, itemId);
     const quantity = foundItem.quantity - 1;
-    const findItemIndex = foundOrder.items.findIndex(item => item['product-id'] === itemId);
     const newTotal = quantity * +foundItem['unit-price'];
+    const findItemIndex = foundOrder.items.findIndex(item => item['product-id'] === itemId);
     foundOrder.items[findItemIndex] = {
       ...foundItem,
       quantity: quantity.toString(),
       total: newTotal.toFixed(2),
     };
+    foundOrder.total = this.totalOrder(foundOrder.items).toString();
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
     this.setState(() => ({
       orders: newOrders,
@@ -86,6 +88,7 @@ export class OrderProvider extends Component {
       quantity: quantity.toString(),
       total: newTotal.toFixed(2),
     };
+    foundOrder.total = this.totalOrder(foundOrder.items).toString();
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
     this.setState(() => ({
       orders: newOrders,
@@ -101,6 +104,7 @@ export class OrderProvider extends Component {
     } else {
       this.addItem(orderId, itemToAdd['product-id']);
     }
+    foundOrder.total = this.totalOrder(foundOrder.items).toString();
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
     this.setState(() => ({
       orders: newOrders,
