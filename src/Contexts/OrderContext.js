@@ -10,7 +10,12 @@ export class OrderProvider extends Component {
   };
 
   componentDidMount() {
-    fetch('../../API/orders.json')
+    /*
+      Replace fetch url with:
+      http://5ba3d0348da2f20014654ca0.mockapi.io/orders
+      to test with an API.
+    */
+    fetch('API/orders.json')
       .then(res => res.json())
       .then(data => this.setState(() => ({ orders: data })));
   }
