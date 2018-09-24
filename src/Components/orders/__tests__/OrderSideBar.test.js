@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, cleanup, fireEvent } from 'react-testing-library';
+import { render, cleanup } from 'react-testing-library';
 import OrderSideBar from '../OrderSideBar';
 
 afterEach(() => {
@@ -42,19 +42,19 @@ const selectOrder = jest.fn();
 
 // OrderSideBar's props = orders, selectOrder
 test('<OrderSideBar /> with orders', () => {
-  const { getAllByTestId, queryByTestId } = render(
+  const { getAllByTestId, queryByTestId, container } = render(
     <OrderSideBar orders={orders} selectOrder={selectOrder} />,
   );
 
   expect(getAllByTestId('menu-item')).length = orders.length;
 
   expect(queryByTestId('no-orders')).toBeFalsy();
+
+  expect(container.firstChild).toMatchSnapshot();
 });
 
-test('<OrderSideBar /> with outorders', () => {
-  const { getByTestId, queryAllByTestId } = render(
-    <OrderSideBar selectOrder={selectOrder} />,
-  );
+test('<OrderSideBar /> without orders', () => {
+  const { getByTestId, queryAllByTestId } = render(<OrderSideBar selectOrder={selectOrder} />);
 
   expect(queryAllByTestId('menu-item')).length = 0;
 

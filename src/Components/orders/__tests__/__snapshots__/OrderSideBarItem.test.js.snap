@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<OrderSideBarItem /> 1`] = `
+<div
+  class="sc-bdVaJa hLZleQ"
+  data-testid="menu-item"
+>
+  <h1
+    class="sc-bwzfXH hDweOk"
+    data-testid="menu-item-title"
+  >
+    Order No. 1
+  </h1>
+</div>
+`;

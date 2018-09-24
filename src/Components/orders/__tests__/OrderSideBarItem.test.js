@@ -15,7 +15,7 @@ const selectOrder = jest.fn();
 
 // OrderSideBarItem's props = id, selectOrder
 test('<OrderSideBarItem />', () => {
-  const { getByTestId } = render(
+  const { getByTestId, container } = render(
     <OrderSideBarItem id={orderId} selectOrder={selectOrder} />,
   );
 
@@ -28,4 +28,6 @@ test('<OrderSideBarItem />', () => {
   fireEvent.click(menuItem);
   expect(selectOrder).toHaveBeenCalledTimes(1);
   expect(selectOrder).toBeCalledWith(orderId);
+
+  expect(container.firstChild).toMatchSnapshot();
 });
