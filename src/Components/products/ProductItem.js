@@ -2,50 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { OrderContext } from '../../Contexts';
-
 import { Icon } from '../../Elements';
 
-const ProductItem = ({ item, orderId, success }) => (
-  <OrderContext.Consumer>
-    {context => (
-      <TableRow>
-        <td>{item['product-id']}</td>
-        <td>
-          {!success && (
-            <button
-              type="submit"
-              disabled={success}
-              onClick={() => context.substractItem(orderId, item['product-id'])}
-            >
-              -
-            </button>
-          )}
+const ProductItem = ({
+  item, orderId, success, substractItem, addItem, deleteItem,
+}) => (
+  <TableRow data-testid="item-row">
+    <td>{item['product-id']}</td>
+    <td>
+      {!success && (
+        <button
+          type="submit"
+          data-testid="substract-item"
+          disabled={success}
+          onClick={() => substractItem(orderId, item['product-id'])}
+        >
+          -
+        </button>
+      )}
 
-          {item.quantity}
+      {item.quantity}
 
-          {!success && (
-            <button
-              type="submit"
-              disabled={success}
-              onClick={() => context.addItem(orderId, item['product-id'])}
-            >
-              +
-            </button>
-          )}
-        </td>
-        <td>{item['unit-price']}</td>
-        <td>{item.total}</td>
-        {!success && (
-          <td>
-            <IconWrapper onClick={() => context.deleteItem(orderId, item['product-id'])}>
-              <Icon name="trash" color="black" />
-            </IconWrapper>
-          </td>
-        )}
-      </TableRow>
+      {!success && (
+        <button
+          type="submit"
+          data-testid="add-item"
+          disabled={success}
+          onClick={() => addItem(orderId, item['product-id'])}
+        >
+          +
+        </button>
+      )}
+    </td>
+    <td>{item['unit-price']}</td>
+    <td>{item.total}</td>
+    {!success && (
+      <td>
+        <IconWrapper data-testid="delete-item" onClick={() => deleteItem(orderId, item['product-id'])}>
+          <Icon name="trash" color="black" />
+        </IconWrapper>
+      </td>
     )}
-  </OrderContext.Consumer>
+  </TableRow>
 );
 
 export default ProductItem;
@@ -59,6 +57,9 @@ ProductItem.propTypes = {
   }).isRequired,
   orderId: PropTypes.string.isRequired,
   success: PropTypes.bool,
+  addItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  substractItem: PropTypes.func.isRequired,
 };
 
 ProductItem.defaultProps = {

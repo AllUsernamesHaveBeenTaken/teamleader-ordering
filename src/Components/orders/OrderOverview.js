@@ -17,6 +17,9 @@ const OrderOverview = () => (
               order={context.orders.find(order => order.id === context.selectedOrder && order)}
               placeOrder={context.placeOrder}
               addNewItem={context.addNewItem}
+              addItem={context.addItem}
+              deleteItem={context.deleteItem}
+              substractItem={context.substractItem}
             />
           </Fragment>
         ) : (

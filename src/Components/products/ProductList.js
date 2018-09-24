@@ -8,7 +8,13 @@ import { Modal } from '../../Elements';
 import { Toggle } from '../../Utilities';
 
 const ProductList = ({
-  items, orderId, success, addNewItem,
+  items,
+  orderId,
+  success,
+  addNewItem,
+  addItem,
+  deleteItem,
+  substractItem,
 }) => (
   <div>
     <h2>Products in this order</h2>
@@ -28,6 +34,9 @@ const ProductList = ({
             success={success}
             item={item}
             orderId={orderId}
+            addItem={addItem}
+            deleteItem={deleteItem}
+            substractItem={substractItem}
           />
         ))}
         {!success && (
@@ -75,6 +84,9 @@ ProductList.propTypes = {
   orderId: PropTypes.string.isRequired,
   success: PropTypes.bool,
   addNewItem: PropTypes.func.isRequired,
+  addItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  substractItem: PropTypes.func.isRequired,
 };
 
 ProductList.defaultProps = {

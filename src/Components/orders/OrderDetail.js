@@ -10,7 +10,9 @@ const totalOrder = (items) => {
   return total.length > 0 ? total.reduce((a, b) => +a + +b) : 0;
 };
 
-const OrderDetail = ({ order, placeOrder, addNewItem }) => (
+const OrderDetail = ({
+  order, placeOrder, addNewItem, addItem, deleteItem, substractItem,
+}) => (
   <OrderDetailWrapper>
     {order.success !== undefined && <FlashMessage success={order.success} />}
     <h1>{`Order No. ${order.id}`}</h1>
@@ -20,6 +22,9 @@ const OrderDetail = ({ order, placeOrder, addNewItem }) => (
         items={order.items}
         orderId={order.id}
         addNewItem={addNewItem}
+        addItem={addItem}
+        deleteItem={deleteItem}
+        substractItem={substractItem}
       />
     ) : (
       <p>This order has no products.</p>
@@ -51,6 +56,9 @@ OrderDetail.propTypes = {
   }).isRequired,
   placeOrder: PropTypes.func.isRequired,
   addNewItem: PropTypes.func.isRequired,
+  addItem: PropTypes.func.isRequired,
+  deleteItem: PropTypes.func.isRequired,
+  substractItem: PropTypes.func.isRequired,
 };
 
 const OrderDetailWrapper = styled.div`
