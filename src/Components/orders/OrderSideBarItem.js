@@ -1,28 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import { elevation, transition } from '../../Utilities';
 
-class OrderSideBarItem extends Component {
-  constructor(props) {
-    super(props);
-    const { id } = this.props;
-    this.state = {
-      id,
-    };
-  }
-
-  render() {
-    const { id } = this.state;
-    const { selectOrder } = this.props;
-    return (
-      <MenuItemWrapper onClick={() => selectOrder(id)}>
-        <MenuItemTitle>{`Order No. ${id}`}</MenuItemTitle>
-      </MenuItemWrapper>
-    );
-  }
-}
+const OrderSideBarItem = ({ selectOrder, id }) => (
+  <MenuItemWrapper data-testid="menu-item" onClick={() => selectOrder(id)}>
+    <MenuItemTitle data-testid="menu-item-title">{`Order No. ${id}`}</MenuItemTitle>
+  </MenuItemWrapper>
+);
 
 export default OrderSideBarItem;
 

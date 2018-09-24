@@ -12,7 +12,7 @@ const OrderOverview = () => (
       {context =>
         (context.orders.length > 0 ? (
           <Fragment>
-            <OrderSideBar />
+            <OrderSideBar orders={context.orders} selectOrder={context.selectOrder} />
             <OrderDetail
               order={context.orders.find(order => order.id === context.selectedOrder && order)}
               placeOrder={context.placeOrder}
