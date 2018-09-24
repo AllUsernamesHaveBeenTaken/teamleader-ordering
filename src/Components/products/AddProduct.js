@@ -39,9 +39,7 @@ class AddProduct extends Component {
           placeholder={quantity}
           value={quantity}
           min="1"
-          onChange={e =>
-            this.setState(() => ({ quantity: e.target.value < 1 ? 1 : e.target.value }))
-          }
+          onChange={e => this.setState({ quantity: e.target.value < 1 ? 1 : e.target.value })}
         />
         <h3>{`Total: ${(+quantity * selectedItem.price).toFixed(2)}`}</h3>
         <button
