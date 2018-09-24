@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import { ProductContext } from '../Contexts';
+import { ProductContext } from '../../Contexts';
 import ProductItem from './ProductItem';
 import AddProduct from './AddProduct';
-import { Modal } from '../Elements';
-import { Toggle } from '../Utilities';
+import { Modal } from '../../Elements';
+import { Toggle } from '../../Utilities';
 
 const ProductList = ({
   items, orderId, success, addNewItem,

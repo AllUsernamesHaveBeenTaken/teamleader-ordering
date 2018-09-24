@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import OrderSideBarItem from './OrderSideBarItem';
-import { OrderContext } from '../Contexts';
+import { OrderContext } from '../../Contexts';
 
 const OrderSideBar = () => (
   <OrderContext.Consumer>

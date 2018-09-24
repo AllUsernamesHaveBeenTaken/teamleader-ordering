@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { OrderContext } from '../Contexts';
+import { OrderContext } from '../../Contexts';
 
-import { Icon } from '../Elements';
+import { Icon } from '../../Elements';
 
 const ProductItem = ({ item, orderId, success }) => (
   <OrderContext.Consumer>

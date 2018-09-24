@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { elevation, transition } from '../Utilities';
+import { elevation, transition } from '../../Utilities';
 
 class OrderSideBarItem extends Component {
   constructor(props) {

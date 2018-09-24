@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import OrderSideBar from './OrderSideBar';
 import OrderDetail from './OrderDetail';
 
-import { OrderContext } from '../Contexts';
+import { OrderContext } from '../../Contexts';
 
 const OrderOverview = () => (
   <OrderOverviewWrapper>

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 
 import { OrderProvider, ProductProvider } from './Contexts';
-import { OrderOverview } from './Components';
+import { OrderOverview } from './Components/orders';
 
 const App = () => (
   <div className="App">
