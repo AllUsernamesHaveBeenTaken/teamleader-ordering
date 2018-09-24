@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 class AddProduct extends Component {
@@ -23,19 +23,18 @@ class AddProduct extends Component {
     const { quantity, selectedItem } = this.state;
     const { products, addNewItem, orderId } = this.props;
     return (
-      <div>
+      <Fragment>
         <h3>Product</h3>
-        <select onChange={this.selectItem}>
+        <select onChange={this.selectItem} data-testid="select-product">
           {products.map(item => (
             <option key={`product-${item.id}`} value={item.id}>
-              {item.id}
+              {item.description}
             </option>
           ))}
         </select>
-        <h3>Description</h3>
-        <p>{selectedItem.description}</p>
         <h3>Quantity</h3>
         <input
+          data-testid="quantity-product"
           type="number"
           placeholder={quantity}
           value={quantity}
@@ -44,6 +43,7 @@ class AddProduct extends Component {
         />
         <h3>{`Total: ${(+quantity * selectedItem.price).toFixed(2)}`}</h3>
         <button
+          data-testid="submit-new-product"
           type="submit"
           onClick={() =>
             addNewItem(orderId, {
@@ -56,7 +56,7 @@ class AddProduct extends Component {
         >
           Add to cart
         </button>
-      </div>
+      </Fragment>
     );
   }
 }
