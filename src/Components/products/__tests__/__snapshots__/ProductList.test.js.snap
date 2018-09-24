@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProductList /> where success is true 1`] = `
+<div>
+  <h2>
+    Products in this order
+  </h2>
+  <table
+    data-testid="items-table"
+    style="border-collapse: collapse;"
+  >
+    <thead>
+      <tr>
+        <th>
+          Product id
+        </th>
+        <th>
+          Quantity
+        </th>
+        <th>
+          Unit price
+        </th>
+        <th>
+          Total
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        class="sc-bZQynM bGQAfj"
+        data-testid="item-row"
+      >
+        <td>
+          B102
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          4.99
+        </td>
+        <td>
+          49.90
+        </td>
+      </tr>
+      <tr
+        class="sc-bZQynM bGQAfj"
+        data-testid="item-row"
+      >
+        <td>
+          B102
+        </td>
+        <td>
+          10
+        </td>
+        <td>
+          4.99
+        </td>
+        <td>
+          49.90
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;

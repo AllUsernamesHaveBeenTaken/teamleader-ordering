@@ -30,7 +30,7 @@ const products = [
 
 // AddProduct's props = products, addNewItem, orderId
 test('<AddProduct />', () => {
-  const { debug, getByTestId } = render(
+  const { getByTestId, container } = render(
     <AddProduct products={products} addNewItem={addNewItem} orderId={orderId} />,
   );
 
@@ -52,5 +52,5 @@ test('<AddProduct />', () => {
     total: '9.75',
   });
 
-  debug();
+  expect(container.firstChild).toMatchSnapshot();
 });

@@ -33,7 +33,9 @@ const items = [
 // ProductList's props = items, orderId, success, addNewItem, addItem, deleteItem, substractItem,
 test('<ProductList /> where success is true', () => {
   const success = true;
-  const { getByTestId, queryByTestId, getAllByTestId } = render(
+  const {
+    getByTestId, queryByTestId, getAllByTestId, container,
+  } = render(
     <ProductList
       items={items}
       orderId={orderId}
@@ -51,4 +53,6 @@ test('<ProductList /> where success is true', () => {
   expect(addNewItem).toHaveBeenCalledTimes(0);
 
   expect(getAllByTestId('item-row').length).toBe(items.length);
+
+  expect(container.firstChild).toMatchSnapshot();
 });

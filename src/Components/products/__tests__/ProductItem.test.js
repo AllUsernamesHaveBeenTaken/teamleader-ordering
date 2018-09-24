@@ -50,7 +50,7 @@ test('<ProductItem /> where success is true', () => {
 
 test('<ProductItem /> where success is false', () => {
   const success = false;
-  const { getByTestId } = render(
+  const { getByTestId, container } = render(
     <ProductItem
       item={item}
       orderId={orderId}
@@ -77,4 +77,6 @@ test('<ProductItem /> where success is false', () => {
   fireEvent.click(getByTestId('delete-item'));
   expect(deleteItem).toHaveBeenCalledTimes(1);
   expect(deleteItem).toHaveBeenCalledWith(orderId, item['product-id']);
+
+  expect(container.firstChild).toMatchSnapshot();
 });
