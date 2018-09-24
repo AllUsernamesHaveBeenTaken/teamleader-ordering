@@ -11,7 +11,7 @@ export class ProductProvider extends Component {
   componentDidMount() {
     fetch('../../API/products.json')
       .then(res => res.json())
-      .then(data => this.setState({ products: data }));
+      .then(data => this.setState(() => ({ products: data })));
   }
 
   render() {

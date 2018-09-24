@@ -12,7 +12,7 @@ export class OrderProvider extends Component {
   componentDidMount() {
     fetch('../../API/orders.json')
       .then(res => res.json())
-      .then(data => this.setState({ orders: data }));
+      .then(data => this.setState(() => ({ orders: data })));
   }
 
   totalOrder = (items) => {
@@ -25,7 +25,7 @@ export class OrderProvider extends Component {
   findItem = (items, itemId) => items.find(item => item['product-id'] === itemId);
 
   selectOrder = (id) => {
-    this.setState({ selectedOrder: id });
+    this.setState(() => ({ selectedOrder: id }));
   };
 
   deleteItem = (orderId, itemId) => {
@@ -34,7 +34,9 @@ export class OrderProvider extends Component {
     const findItemIndex = foundOrder.items.findIndex(item => item['product-id'] === itemId);
     foundOrder.items.splice(findItemIndex, 1);
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
-    this.setState({ orders: newOrders });
+    this.setState(() => ({
+      orders: newOrders,
+    }));
   };
 
   placeOrder = (orderId) => {
@@ -49,7 +51,9 @@ export class OrderProvider extends Component {
     console.log('Is order placed: ', randomBoolean);
     console.log(`Order-${foundOrder.id}:`, foundOrder);
     console.log('====================================');
-    this.setState({ orders: newOrders });
+    this.setState(() => ({
+      orders: newOrders,
+    }));
   };
 
   substractItem = (orderId, itemId) => {
@@ -65,7 +69,9 @@ export class OrderProvider extends Component {
       total: newTotal.toFixed(2),
     };
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
-    this.setState({ orders: newOrders });
+    this.setState(() => ({
+      orders: newOrders,
+    }));
   };
 
   addItem = (orderId, itemId) => {
@@ -81,7 +87,9 @@ export class OrderProvider extends Component {
       total: newTotal.toFixed(2),
     };
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
-    this.setState({ orders: newOrders });
+    this.setState(() => ({
+      orders: newOrders,
+    }));
   };
 
   addNewItem = (orderId, itemToAdd) => {
@@ -94,7 +102,9 @@ export class OrderProvider extends Component {
       this.addItem(orderId, itemToAdd['product-id']);
     }
     const newOrders = orders.map(order => (order.id === orderId ? foundOrder : order));
-    this.setState({ orders: newOrders });
+    this.setState(() => ({
+      orders: newOrders,
+    }));
   };
 
   render() {
