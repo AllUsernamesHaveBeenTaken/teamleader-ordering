@@ -18,7 +18,7 @@ const ProductList = ({
 }) => (
   <div>
     <h2>Products in this order</h2>
-    <table style={{ borderCollapse: 'collapse' }}>
+    <table data-testid="items-table" style={{ borderCollapse: 'collapse' }}>
       <thead>
         <tr>
           <th>Product id</th>
@@ -45,13 +45,14 @@ const ProductList = ({
               <Toggle>
                 {({ on, toggle }) => (
                   <Fragment>
-                    <button type="button" onClick={toggle}>
+                    <button data-testid="add-product" type="button" onClick={toggle}>
                       +
                     </button>
                     <Modal on={on} toggle={toggle}>
                       <ProductContext.Consumer>
                         {({ products }) => (
                           <AddProduct
+                            data-testid="<AddProduct />"
                             orderId={orderId}
                             products={products}
                             addNewItem={addNewItem}

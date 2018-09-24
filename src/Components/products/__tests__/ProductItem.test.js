@@ -63,14 +63,17 @@ test('<ProductItem /> where success is false', () => {
 
   expect(getByTestId('item-row')).toBeTruthy();
 
+  expect(getByTestId('substract-item')).toBeTruthy();
   fireEvent.click(getByTestId('substract-item'));
   expect(substractItem).toHaveBeenCalledTimes(1);
   expect(substractItem).toHaveBeenCalledWith(orderId, item['product-id']);
 
+  expect(getByTestId('add-item')).toBeTruthy();
   fireEvent.click(getByTestId('add-item'));
   expect(addItem).toHaveBeenCalledTimes(1);
   expect(addItem).toHaveBeenCalledWith(orderId, item['product-id']);
 
+  expect(getByTestId('delete-item')).toBeTruthy();
   fireEvent.click(getByTestId('delete-item'));
   expect(deleteItem).toHaveBeenCalledTimes(1);
   expect(deleteItem).toHaveBeenCalledWith(orderId, item['product-id']);
